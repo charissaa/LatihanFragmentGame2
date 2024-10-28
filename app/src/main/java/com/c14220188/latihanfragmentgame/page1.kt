@@ -41,8 +41,8 @@ class page1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Ke page 2
-        val _btnKePage2 = view.findViewById<Button>(R.id.btnPage2)
+        //Ke page 2 dari button Give Up
+        val _btnKePage2 = view.findViewById<Button>(R.id.btnGiveUp)
         _btnKePage2.setOnClickListener {
             val mpage2 = page2()
             val mFragmentManager = parentFragmentManager
@@ -53,7 +53,7 @@ class page1 : Fragment() {
             }
         }
 
-        //Ke page 3
+        //Ke page 3 dengan button Set Number
         val _btnKePage3 = view.findViewById<Button>(R.id.btnPage3)
         _btnKePage3.setOnClickListener {
             val mpage3 = page3()

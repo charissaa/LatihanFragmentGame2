@@ -3,12 +3,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".page2">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".page2"
+    android:padding="10dp"
+    android:background="#f5f0e1">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <Button
+        android:id="@+id/btnPage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Game"
+        android:textSize="20sp"
+        android:textColor="#212121"
+        android:backgroundTint="#ffc13b"/>
+
+    <Button
+        android:id="@+id/btnPage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btnPage1"
+        app:layout_constraintStart_toEndOf="@id/btnPage1"
+        app:layout_constraintEnd_toStartOf="@id/btnPage3"
+        android:text="Final Score"
+        android:textSize="17sp"
+        android:textColor="#212121"
+        android:backgroundTint="#ff6e40"/>
+
+    <Button
+        android:id="@+id/btnPage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/btnPage2"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Set Number"
+        android:textSize="17sp"
+        android:textColor="#212121"
+        android:backgroundTint="#ffc13b"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment 2" />
+        android:id="@+id/yourFinalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Final Score:"
+        android:textSize="47sp"
+        android:textStyle="bold"
+        android:textColor="#1e3d59"
+        android:layout_marginTop="-250dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/finalScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="70sp"
+        android:textStyle="bold"
+        android:textColor="#1e3d59"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/yourFinalScore"
+        app:layout_constraintStart_toStartOf="@id/yourFinalScore"
+        app:layout_constraintEnd_toEndOf="@id/yourFinalScore"/>
+
+    <Button
+        android:id="@+id/btnPlayAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play Again?"
+        android:textSize="44sp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintTop_toBottomOf="@id/yourFinalScore"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#1e3d59"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

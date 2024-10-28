@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".page1"
     android:padding="10dp"
-    android:background="#e8e8e8">
+    android:background="#f5f0e1">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,8 +16,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Page 1"
-        android:backgroundTint="#4a4a4a"/>
+        android:text="Game"
+        android:textSize="20sp"
+        android:textColor="#1e3d59"
+        android:backgroundTint="#ff6e40"/>
 
     <Button
         android:id="@+id/btnPage2"
@@ -25,9 +27,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/btnPage1"
         app:layout_constraintStart_toEndOf="@id/btnPage1"
-        app:layout_constraintEnd_toStartOf="@id/btnPage1"
-        android:text="Page 2"
-        android:backgroundTint="#787878"/>
+        app:layout_constraintEnd_toStartOf="@id/btnPage3"
+        android:text="Final Score"
+        android:textSize="17sp"
+        android:textColor="#1e3d59"
+        android:backgroundTint="#ffc13b"/>
 
     <Button
         android:id="@+id/btnPage3"
@@ -35,8 +39,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/btnPage2"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Page 3"
-        android:backgroundTint="#787878"/>
+        android:text="Set Number"
+        android:textSize="17sp"
+        android:textColor="#1e3d59"
+        android:backgroundTint="#ffc13b"/>
 
     <TextView
         android:id="@+id/text1"
@@ -45,9 +51,10 @@
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@id/btnPage1"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"
         android:textStyle="bold"
+        android:textColor="#1e3d59"
         android:text="Your Score: "/>
 
     <TextView
@@ -57,6 +64,7 @@
         android:textSize="30sp"
         android:text="50"
         android:textStyle="bold"
+        android:textColor="#1e3d59"
         app:layout_constraintTop_toTopOf="@id/text1"
         app:layout_constraintStart_toEndOf="@id/text1"
         android:layout_marginStart="5dp"/>
@@ -163,7 +171,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Give Up" />
+        android:text="Give Up"
+        android:textSize="33sp"
+        android:backgroundTint="#1e3d59"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
