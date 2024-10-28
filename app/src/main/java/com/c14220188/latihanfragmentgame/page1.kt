@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +36,34 @@ class page1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_page1, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //Ke page 2
+        val _btnKePage2 = view.findViewById<Button>(R.id.btnPage2)
+        _btnKePage2.setOnClickListener {
+            val mpage2 = page2()
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mpage2, page2::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+        //Ke page 3
+        val _btnKePage3 = view.findViewById<Button>(R.id.btnPage3)
+        _btnKePage3.setOnClickListener {
+            val mpage3 = page3()
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mpage3, page3::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
     }
 
     companion object {
