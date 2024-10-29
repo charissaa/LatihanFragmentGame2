@@ -243,6 +243,19 @@
         </androidx.cardview.widget.CardView>
     </GridLayout>
 
+    <TextView
+        android:id="@+id/gameEnding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/gameLayout"
+        app:layout_constraintEnd_toEndOf="@id/gameLayout"
+        app:layout_constraintTop_toTopOf="@id/gameLayout"
+        app:layout_constraintBottom_toBottomOf="@id/gameLayout"
+        android:gravity="center"
+        android:textColor="#1e3d59"
+        android:textStyle="bold"
+        android:textSize="60sp"/>
+
     <Button
         android:id="@+id/btnGiveUp"
         android:layout_width="wrap_content"

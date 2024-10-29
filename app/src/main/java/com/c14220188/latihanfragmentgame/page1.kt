@@ -1,5 +1,8 @@
 package com.c14220188.latihanfragmentgame
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -61,7 +64,7 @@ class page1 : Fragment() {
             buttons[i].tag = rndm[i]
 
             buttons[i].setOnClickListener {
-                onClickButton(buttons[i], _myScore)
+                onClickButton(buttons[i], _myScore, buttons)
             }
         }
 
@@ -94,11 +97,29 @@ class page1 : Fragment() {
             }
         }
 
-        //
+        //Jika semua kartu terbuka/menang
+        if (buttons.all { it.text.toString() != "??" }) {
+            val _btnPage2 = view.findViewById<Button>(R.id.btnPage2)
+            _btnPage2.setOnClickListener {
+                val mBundle = Bundle()
+                mBundle.putString("DATA", _myScore.text.toString())
+
+                val mpage2 = page2()
+                mpage2.arguments = mBundle
+
+                val mFragmentManager = parentFragmentManager
+                mFragmentManager.beginTransaction().apply {
+                    replace(R.id.frameContainer, mpage2, page2::class.java.simpleName)
+                    addToBackStack(null)
+                    commit()
+                }
+            }
+        }
     }
 
     private val selectedCards = mutableListOf<TextView>()
-    private fun onClickButton(card: TextView, myScore: TextView) {
+
+    private fun onClickButton(card: TextView, myScore: TextView, buttons: List<TextView>) {
         card.text = card.tag.toString()
         selectedCards.add(card)
 
@@ -111,8 +132,16 @@ class page1 : Fragment() {
 
                 card1.isClickable = false
                 card2.isClickable = false
+
+                if (checkAllCard(buttons)) {
+                    showGameEnding("You Win!")
+                    navigateToFragment(page2(), Bundle().apply {
+                        putString("DATA", myScore.text.toString())
+                    })
+                }
             } else {
                 myScore.text = (myScore.text.toString().toInt() - 5).toString()
+                checkGameOver(myScore)
 
                 Handler(Looper.getMainLooper()).postDelayed({
                     card1.text = "??"
@@ -123,6 +152,60 @@ class page1 : Fragment() {
             selectedCards.clear()
         }
     }
+
+    private fun checkAllCard(buttons: List<TextView>): Boolean {
+        return buttons.all { it.text.toString() != "??" }
+    }
+
+    private fun navigateToFragment(fragment: Fragment, bundle: Bundle?) {
+        if (bundle != null) {
+            fragment.arguments = bundle
+        }
+        parentFragmentManager.beginTransaction().apply {
+            replace(R.id.frameContainer, fragment, fragment::class.java.simpleName)
+            addToBackStack(null)
+            commit()
+        }
+    }
+
+    //Game Status Ending
+    private fun showGameEnding(message: String) {
+        val _gameEnding = view?.findViewById<TextView>(R.id.gameEnding)
+        _gameEnding?.text = message
+        _gameEnding?.visibility = View.VISIBLE
+        _gameEnding?.alpha = 0f
+
+        val fadeIn = ObjectAnimator.ofFloat(_gameEnding, "alpha", 0f, 1f)
+        fadeIn.duration = 1000
+        fadeIn.start()
+
+        fadeIn.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    _gameEnding?.visibility = View.GONE
+                }, 2000)
+            }
+        })
+    }
+
+    private fun checkGameOver(myScore: TextView) {
+        if (myScore.text.toString().toInt() <= 0) {
+            showGameEnding("Game Over!")
+            val mBundle = Bundle()
+            mBundle.putString("DATA", myScore.text.toString())
+
+            val mpage2 = page2()
+            mpage2.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mpage2, page2::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+    }
+
 
     companion object {
         /**
