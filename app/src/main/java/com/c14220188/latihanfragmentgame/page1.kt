@@ -1,11 +1,14 @@
 package com.c14220188.latihanfragmentgame
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,10 +44,36 @@ class page1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Inisialisasi
+        val startNumber = arguments?.getString("DATA")?.toInt()
+        val _myScore =view.findViewById<TextView>(R.id.myScore)
+        val buttons = listOf(view.findViewById<TextView>(R.id.button1), view.findViewById<TextView>(R.id.button2),view.findViewById<TextView>(R.id.button3),view.findViewById<TextView>(R.id.button4),view.findViewById<TextView>(R.id.button5),view.findViewById<TextView>(R.id.button6),view.findViewById<TextView>(R.id.button7),view.findViewById<TextView>(R.id.button8),view.findViewById<TextView>(R.id.button9),view.findViewById<TextView>(R.id.button10))
+
+        //Random angka
+        val rndm = if (startNumber == null) {
+            listOf(1, 1, 2, 2, 3, 3, 4, 4, 5, 5).shuffled()
+        } else {
+            val range = (startNumber .. (startNumber +4)).toList()
+            (range + range).shuffled()
+        }
+        for (i in buttons.indices) {
+            buttons[i].text = "??"
+            buttons[i].tag = rndm[i]
+
+            buttons[i].setOnClickListener {
+                onClickButton(buttons[i], _myScore)
+            }
+        }
+
         //Ke page 2 dari button Give Up
-        val _btnKePage2 = view.findViewById<Button>(R.id.btnGiveUp)
-        _btnKePage2.setOnClickListener {
+        val _btnGiveUp = view.findViewById<Button>(R.id.btnGiveUp)
+        _btnGiveUp.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("DATA", _myScore.text.toString())
+
             val mpage2 = page2()
+            mpage2.arguments = mBundle
+
             val mFragmentManager = parentFragmentManager
             mFragmentManager.beginTransaction().apply {
                 replace(R.id.frameContainer, mpage2, page2::class.java.simpleName)
@@ -63,6 +92,35 @@ class page1 : Fragment() {
                 addToBackStack(null)
                 commit()
             }
+        }
+
+        //
+    }
+
+    private val selectedCards = mutableListOf<TextView>()
+    private fun onClickButton(card: TextView, myScore: TextView) {
+        card.text = card.tag.toString()
+        selectedCards.add(card)
+
+        if (selectedCards.size == 2) {
+            val card1 = selectedCards[0]
+            val card2 = selectedCards[1]
+
+            if (card1.tag == card2.tag) {
+                myScore.text = (myScore.text.toString().toInt() + 10).toString()
+
+                card1.isClickable = false
+                card2.isClickable = false
+            } else {
+                myScore.text = (myScore.text.toString().toInt() - 5).toString()
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    card1.text = "??"
+                    card2.text = "??"
+                }, 1000)
+            }
+
+            selectedCards.clear()
         }
     }
 

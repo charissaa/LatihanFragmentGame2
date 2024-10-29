@@ -59,14 +59,15 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <EditText
-        android:id="@+id/finalScore"
+        android:id="@+id/startingNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
-        android:textSize="70sp"
+        android:hint="Input starting number"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="#1e3d59"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/yourFinalScore"
         app:layout_constraintStart_toStartOf="@id/yourFinalScore"
         app:layout_constraintEnd_toEndOf="@id/yourFinalScore"/>

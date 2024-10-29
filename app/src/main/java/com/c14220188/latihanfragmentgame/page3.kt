@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,9 +42,8 @@ class page3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //Ke page 1 setelah set angka dengan button Submit
-        val _btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
-        _btnSubmit.setOnClickListener {
+        val _btnPage1 = view.findViewById<Button>(R.id.btnPage1)
+        _btnPage1.setOnClickListener{
             val mpage1 = page1()
             val mFragmentManager = parentFragmentManager
             mFragmentManager.beginTransaction().apply {
@@ -52,6 +52,26 @@ class page3 : Fragment() {
                 commit()
             }
         }
+
+        //Starting Number
+        val _startingNumber = view.findViewById<EditText>(R.id.startingNumber)
+        val _btnSubmit = view.findViewById<Button>(R.id.btnSubmit)
+        _btnSubmit.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString("DATA", _startingNumber.text.toString())
+
+            val mpage1 = page1()
+            mpage1.arguments = mBundle
+
+            val mFragmentManager = parentFragmentManager
+            mFragmentManager.beginTransaction().apply {
+                replace(R.id.frameContainer, mpage1, page1::class.java.simpleName)
+                addToBackStack(null)
+                commit()
+            }
+        }
+
+
     }
 
     companion object {

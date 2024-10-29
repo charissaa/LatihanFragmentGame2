@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,6 +65,9 @@ class page2 : Fragment() {
                 commit()
             }
         }
+
+        val _finalScore = view.findViewById<TextView>(R.id.finalScore)
+        _finalScore.text =arguments?.getString("DATA")
     }
 
     companion object {
